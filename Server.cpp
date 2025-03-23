@@ -93,16 +93,30 @@ void Server::handleClientData(int clientFd) {
 
     if (bytes <= 0) {
         std::cout << "Client disconnected: " << clientFd << "\n";
+    
+        // Cleanup nickname if set
+        Client* client = _clients[clientFd];
+        std::string nick = client->getNickname();
+        if (!nick.empty())
+            unregisterNickname(nick);
+    
+        // Close socket
         close(clientFd);
-        _clients.erase(clientFd);
+    
+        // Remove from poll list
         for (size_t i = 0; i < _pollfds.size(); ++i) {
             if (_pollfds[i].fd == clientFd) {
                 _pollfds.erase(_pollfds.begin() + i);
                 break;
             }
         }
+    
+        // Delete client
+        delete client;
+        _clients.erase(clientFd);
         return;
     }
+    
 
     Client* client = _clients[clientFd];
     client->appendToBuffer(std::string(buffer, bytes));
@@ -110,13 +124,17 @@ void Server::handleClientData(int clientFd) {
     std::string& fullBuffer = client->getBuffer();
     size_t pos;
     while ((pos = fullBuffer.find("\n")) != std::string::npos) {
-    //while ((pos = fullBuffer.find("\r\n")) != std::string::npos)
         std::string commandLine = fullBuffer.substr(0, pos);
-        fullBuffer.erase(0, pos + 2);
-
-        std::cout << "Parsing command from client " << clientFd << ": " << commandLine << "\n";
+        if (!commandLine.empty() && commandLine[commandLine.length() - 1] == '\r')
+            commandLine = commandLine.substr(0, commandLine.length() - 1);
+        fullBuffer.erase(0, pos + 1);
+    
+        std::string displayName = client->getNickname().empty() ? "(unknown)" : client->getNickname();
+        std::cout << "Parsing command from client " << clientFd << " (" << displayName << "): " << commandLine << "\n";
+        
         CommandHandler::handleCommand(commandLine, client, *this);
     }
+    
 }
 
 // nicknamme
@@ -131,4 +149,12 @@ void Server::registerNickname(const std::string &nickname, Client* client) {
 
 void Server::unregisterNickname(const std::string &nickname) {
     _nickToClient.erase(nickname);
+}
+
+// Chanel 
+
+Channel* Server::getOrCreateChannel(const std::string& name) {
+    if (_channels.find(name) == _channels.end())
+        _channels[name] = new Channel(name);
+    return _channels[name];
 }

@@ -6,6 +6,7 @@
 #include <poll.h>
 #include <map>
 #include "Client.hpp"
+#include "Channel.hpp"
 
 class Server {
 private:
@@ -15,6 +16,7 @@ private:
     std::vector<pollfd> _pollfds;
 	std::map<int, Client*> _clients; // key: fd
     std::map<std::string, Client*> _nickToClient; // nickname -> client
+    std::map<std::string, Channel*> _channels;
 
     void initSocket();
     void handleNewConnection();
@@ -30,6 +32,8 @@ public:
     bool isNicknameTaken(const std::string &nickname) const;
     void registerNickname(const std::string &nickname, Client* client);
     void unregisterNickname(const std::string &nickname);
+    Channel* getOrCreateChannel(const std::string& name);
+    const std::map<int, Client*>& getClients() const { return _clients; }
 };
 
 #endif
