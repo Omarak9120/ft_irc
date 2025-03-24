@@ -1,0 +1,84 @@
+IRC
+
+1:
+Right now, your server:
+
+Accepts incoming TCP connections
+
+Handles multiple clients using poll()
+
+Reads and echoes data from each client
+
+Cleans up when clients disconnect
+
+2 :
+Each client now has a:
+
+File descriptor
+
+IP address
+
+Nickname
+
+Username
+
+Authenticated status
+
+3: 
+
+can't use the same name 
+
+4 :
+create a new channel done.
+
+5: JOIN
+
+6:
+What PRIVMSG Does
+If the target is a nickname, it sends a private message to one user.
+
+If the target is a channel, it broadcasts the message to all users in that channel (except the sender).
+
+
+✅ User authentication and registration
+✅ Joining channels
+✅ Sending and receiving messages in channels (PRIVMSG)
+✅ Preventing duplicate nicknames
+
+
+Command	Purpose
+KICK	Eject a user from a channel
+INVITE	Invite a user to a channel
+TOPIC	View or set the channel topic
+MODE	Modify channel modes: i, t, k, o, l
+
+7 : 
+KICK 
+
+8 : 
+TOPIC
+
+9: 
+mode
+
+10 :
+INVITE
+
+11 : 
+PRIVMSG
+
+12 :
+mode +i : to let it VIP , can;t join only with invite 
+
+13 :
+mode +t : can't change the topic only the operators can 
+
+
+
+
+
+
+
+
+
+

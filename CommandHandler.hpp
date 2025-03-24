@@ -17,6 +17,13 @@ private:
     static void checkAndWelcome(Client* client);
     static void handleJOIN(const std::vector<std::string>& args, Client* client, Server& server);
     static void handlePRIVMSG(const std::vector<std::string>& args, Client* client, Server& server);
+    static void handleKICK(const std::vector<std::string>& args, Client* client, Server& server);
+    static void handleTOPIC(const std::vector<std::string>& args, Client* client, Server& server);
+    static void handleINVITE(const std::vector<std::string>& args, Client* client, Server& server);
+    static void handleMODE(const std::vector<std::string>& args, Client* client, Server& server);
+
+
+
 
 
 

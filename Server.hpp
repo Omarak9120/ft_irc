@@ -34,6 +34,8 @@ public:
     void unregisterNickname(const std::string &nickname);
     Channel* getOrCreateChannel(const std::string& name);
     const std::map<int, Client*>& getClients() const { return _clients; }
+    Client* getClientByNickname(const std::string& nickname) const;
+
 };
 
 #endif

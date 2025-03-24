@@ -158,3 +158,12 @@ Channel* Server::getOrCreateChannel(const std::string& name) {
         _channels[name] = new Channel(name);
     return _channels[name];
 }
+
+//o
+Client* Server::getClientByNickname(const std::string& nickname) const {
+    for (std::map<int, Client*>::const_iterator it = _clients.begin(); it != _clients.end(); ++it) {
+        if (it->second->getNickname() == nickname)
+            return it->second;
+    }
+    return NULL;
+}
