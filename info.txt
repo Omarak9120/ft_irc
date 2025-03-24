@@ -73,6 +73,8 @@ mode +i : to let it VIP , can;t join only with invite
 13 :
 mode +t : can't change the topic only the operators can 
 
+14 :
+o+/o-
 
 
 

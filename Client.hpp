@@ -13,6 +13,7 @@ private:
     bool _authenticated;
     bool _registered;
     std::string _buffer; // accumulates incoming data
+    
 
 public:
     Client(int fd, const std::string &ip);
