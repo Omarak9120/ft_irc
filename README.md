@@ -3,7 +3,7 @@
 
 
 ##### *Proudly coded by omar abdelader, marc katerji  and khaled akra :heart:*
-
+![irc](https://user-images.githubusercontent.com/25162290/159374311-d8ab4c91-6011-4df0-a1f1-83d9ec4c7ada.png)
 ___
 # 🤔 Description
 This project is about creating our own IRC server. We used an actual IRC client to connect to our server and test it.
