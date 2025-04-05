@@ -6,7 +6,7 @@
 /*   By: mkaterji <mkaterji@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 22:07:40 by oabdelka          #+#    #+#             */
-/*   Updated: 2025/04/05 15:23:13 by mkaterji         ###   ########.fr       */
+/*   Updated: 2025/04/05 17:34:21 by mkaterji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int check_password(const char *pass)
 {
     while(*pass)
     {
-        if(*pass != ' ' || *pass != '\t')
+        if(*pass == ' ' || *pass == '\t')
             return 0;
         else
             pass++;
@@ -27,6 +27,7 @@ int check_password(const char *pass)
 }
 
 int main(int argc, char* argv[]) {
+    std::cout << argv[2] << std::endl;
     
     if (argc != 3) {
         std::cerr << "Usage: ./ircserv <port> <password>\n";
@@ -42,7 +43,7 @@ int main(int argc, char* argv[]) {
 
     if(!check_password(argv[2]))
     {
-        std::cerr << "Password can't contain spaces or tabs!\n";
+        std::cerr << "Wrong password format!\n";
         return 1;
     }
     
